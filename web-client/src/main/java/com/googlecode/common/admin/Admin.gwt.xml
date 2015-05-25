@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module SYSTEM "http://google-web-toolkit.googlecode.com/svn/releases/2.4/distro-source/core/src/gwt-module.dtd">
+<module rename-to='admin'>
+    
+    <!-- App modules -->
+    <inherits name='com.googlecode.common.App' />
+    <inherits name='com.googlecode.common.admin.protocol.Protocol' />
+    
+    
+    <!-- Specify the app entry point class -->
+    <entry-point class='com.googlecode.common.admin.client.Admin' />
+    
+    <!-- Specify the paths for translatable code -->
+    <source path="client" />
+
+</module>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	<mvc:annotation-driven />
+    
+    <!-- This tag allows for mapping the DispatcherServlet to "/" (thus overriding the mapping 
+        of the container's default Servlet), while still allowing static resource requests to be handled 
+        by the container's default Servlet. It configures a DefaultServletHttpRequestHandler with 
+        a URL mapping (given a lowest precedence order) of "/**". 
+        This handler will forward all requests to the default Servlet.  -->
+    <mvc:default-servlet-handler/>
+
+	<!-- Scans within the base package of the application for @Components to configure as beans -->
+	<context:component-scan base-package="com.googlecode.common.admin.web" />
+
+</beans>

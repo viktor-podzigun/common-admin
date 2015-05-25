@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    
+    <context:property-placeholder location="classpath:jdbc.properties" />
+    
+    <!--
+	Responsible for creating EntityManagers opening transactions and binding them to the current thread context.
+	-->    
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+       
+    <!--
+	Tells Spring to put transactional advice on any class or method that has an @Transactional annotation on it. 
+    -->
+	<tx:annotation-driven mode="proxy" transaction-manager="transactionManager"/>
+	
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="database" value="POSTGRESQL"/> <!-- HSQL --> 
+    			<property name="showSql" value="false"/> 
+    			<property name="generateDdl" value="false"/> 
+			</bean>
+		</property>
+	</bean>
+	
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName"><value>${admin_jdbc.driverClassName}</value></property>
+        <property name="url"><value>${admin_jdbc.url}</value></property>
+        <property name="username"><value>${admin_jdbc.username}</value></property>
+        <property name="password"><value>${admin_jdbc.password}</value></property>
+        <property name="maxActive"><value>${admin_jdbc.maxActive}</value></property>
+        <property name="maxWait"><value>${admin_jdbc.maxWait}</value></property>
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxOpenPreparedStatements" value="1024"/>   
+    </bean>
+    
+</beans>

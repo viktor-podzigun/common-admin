@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+             xmlns:c="urn:import:com.googlecode.common.client.ui">
+
+  <g:HTMLPanel>
+    <div class="row-fluid">
+        <g:Anchor ui:field="returnUrl" text="Return back" href="#" />
+        <c:ImageButton ui:field="btnUpdate" text="Update" 
+            addStyleNames="btn-primary" />
+    </div>
+    <hr />
+    <div class="row-fluid">
+      <g:HTMLPanel tag="form" styleName="form-horizontal" >
+        <div class="control-group">
+          <label class="control-label">First Name</label>
+          <div class="controls">
+            <c:TextField ui:field="firstNameText" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Second Name</label>
+          <div class="controls">
+            <c:TextField ui:field="secondNameText" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">E-mail</label>
+          <div class="controls">
+            <c:TextField ui:field="emailText" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Phone</label>
+          <div class="controls">
+            <c:TextField ui:field="phoneText" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Company</label>
+          <div class="controls">
+            <c:TextField ui:field="companyText" readOnly="true" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Old Password</label>
+          <div class="controls">
+            <c:PasswordField ui:field="oldPassText" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">New Password</label>
+          <div class="controls">
+            <c:PasswordField ui:field="newPassText" />
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Repeat Password</label>
+          <div class="controls">
+            <c:PasswordField ui:field="newPassRepeatText" />
+          </div>
+        </div>
+      </g:HTMLPanel>
+    </div>
+  </g:HTMLPanel>
+
+</ui:UiBinder>

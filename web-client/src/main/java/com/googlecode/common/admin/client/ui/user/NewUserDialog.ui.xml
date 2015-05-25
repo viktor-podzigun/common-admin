@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' 
+             xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+             xmlns:c="urn:import:com.googlecode.common.client.ui">
+
+  <g:HTMLPanel tag="form" styleName="form-horizontal" >
+    <div class="control-group">
+      <label class="control-label">*Login</label>
+      <div class="controls">
+        <c:TextField ui:field="loginText" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">*Password</label>
+      <div class="controls">
+        <c:PasswordField ui:field="passwordText" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">*First Name</label>
+      <div class="controls">
+        <c:TextField ui:field="firstNameText" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">*Second Name</label>
+      <div class="controls">
+        <c:TextField ui:field="secondNameText" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">*E-mail</label>
+      <div class="controls">
+        <c:TextField ui:field="emailText" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">Phone</label>
+      <div class="controls">
+        <c:TextField ui:field="phoneText" />
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label">*Company</label>
+      <div class="controls">
+        <c:LoadableComboBox ui:field="companyCombo" />
+      </div>
+    </div>
+    <p><small>(*) Indicates required fields</small></p>
+  </g:HTMLPanel>
+
+</ui:UiBinder>

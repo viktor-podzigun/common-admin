@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd" version="1.0">
+
+	<persistence-unit name="persistenceUnit">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>	
+        
+        <!-- Validation modes: AUTO, CALLBACK, NONE
+          Bean validation provides three modes of operation within the JPA environment: 
+        auto, callback, and none. As you may have guessed, none disables bean validation 
+        for a particular persistence unit. The auto mode, which is the default, enables 
+        bean validation if a validation provider is available within the classpath. 
+          When callback mode is specified, a bean validation provider must be available 
+        for use by the JPA provider. If not, the JPA provider will throw an exception 
+        upon instantiation of a new JPA entity manager factory. 
+          While auto mode simplifies deployment, it can lead to problems if validation 
+        is unexpectedly not taking place due to a configuration problem. 
+          It is a good practice to use either none or callback mode explicitly in order 
+        to get consistent behavior.
+        <validation-mode>CALLBACK</validation-mode-->
+    
+		<properties>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+		</properties>
+	
+    </persistence-unit>
+
+</persistence>

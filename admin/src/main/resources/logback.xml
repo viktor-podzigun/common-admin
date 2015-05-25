@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+      <!--pattern>%thread|%.-1level|%-40.40logger{0}|%msg%n</pattern-->
+    </layout>
+  </appender>
+
+  <!--appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${catalina.base}/logs/admin.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>${catalina.base}/logs/admin.%d{yyyy-MM-dd}.log.zip</fileNamePattern>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender-->
+
+  <!-- Application Loggers -->
+  <logger name="com.googlecode.common" level="trace" />
+
+  <!-- 3rdparty Loggers -->
+  <logger name="org.springframework.core" level="info" />
+  <logger name="org.springframework.beans" level="info" />
+  <logger name="org.springframework.context" level="warn" />
+  <logger name="org.springframework.web" level="warn" />
+  <logger name="org.springframework.security" level="warn" />
+    
+  <!-- Root Logger -->
+  <root level="warn">
+    <appender-ref ref="console" />
+  </root>
+
+</configuration>
