@@ -109,7 +109,7 @@
         <dependency>
             <groupId>com.googlecode.web-commons</groupId>
             <artifactId>web-common-client</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.6-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

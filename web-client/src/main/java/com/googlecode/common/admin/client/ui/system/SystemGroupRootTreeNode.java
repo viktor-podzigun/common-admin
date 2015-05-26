@@ -94,7 +94,7 @@ public final class SystemGroupRootTreeNode extends LoadableBrowseTreeNode {
     private class LoadGroupsTask extends RequestTask<SystemGroupListResponse> {
 
         public LoadGroupsTask() {
-            super("Fetching groups...");
+            super("Fetching environments...");
         }
 
         @Override
@@ -116,7 +116,7 @@ public final class SystemGroupRootTreeNode extends LoadableBrowseTreeNode {
         private final SystemGroupDTO    dto;
         
         public CreateGroupTask(MessageBox dlg, SystemGroupDTO dto) {
-            super("Creating group...");
+            super("Creating environment...");
             
             this.dlg = dlg;
             this.dto = dto;

@@ -29,14 +29,12 @@ public final class UserBrowsePanel extends AbstractUserPanel {
         super(allUsers, true);
         
         this.systemId = systemId;
-        
-        contactsPanel = new UserContactsPanel();
-        tabPanel.add(contactsPanel, "Contacts", 
-                AdminImages.INSTANCE.contacts());
-        
+
         permissionsPanel = new UserPermissionsPanel(systemId, false);
-        tabPanel.add(permissionsPanel, "Permissions", 
-                AdminImages.INSTANCE.key());
+        tabPanel.add(permissionsPanel, "Permissions", AdminImages.INSTANCE.key());
+
+        contactsPanel = new UserContactsPanel();
+        tabPanel.add(contactsPanel, "Contacts", AdminImages.INSTANCE.contacts());
     }
 
     public void setData(long groupId) {

@@ -33,14 +33,12 @@ public final class CompanyBrowsePanel extends AbstractUserPanel {
     
     public CompanyBrowsePanel(boolean allUsers) {
         super(allUsers, false);
-        
-        contactsPanel = new UserContactsPanel();
-        tabPanel.add(contactsPanel, "Contacts", 
-                AdminImages.INSTANCE.contacts());
-        
+
         systemsPanel = new UserSystemsPanel();
-        tabPanel.add(systemsPanel, "Applications", 
-                AdminImages.INSTANCE.system());
+        tabPanel.add(systemsPanel, "Applications", AdminImages.INSTANCE.system());
+
+        contactsPanel = new UserContactsPanel();
+        tabPanel.add(contactsPanel, "Contacts", AdminImages.INSTANCE.contacts());
     }
 
     public void setData(CompanyDTO dto, long companyId) {

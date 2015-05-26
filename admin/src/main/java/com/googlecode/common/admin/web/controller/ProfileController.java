@@ -47,7 +47,7 @@ public class ProfileController extends BaseController {
         
         // prepare application menu
         AppMenuDTO appMenu = systemsService.getAppMenu(-1, user.getId());
-        appMenu.setTitle("Settings");
+        appMenu.setTitle("Profile");
         appMenu.setUrl("#");
         loginDto.setAppMenu(appMenu);
         
