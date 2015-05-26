@@ -13,16 +13,35 @@
     <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
-<!-- Force download sources:
-    got from here: http://stackoverflow.com/questions/2059431/get-source-jars-from-maven-repository
-  
-  mvn dependency:sources
- -->
-
     <name>${project.artifactId}</name>
 
+    <properties>
+        <tomcat7.download.url>http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.47/bin/apache-tomcat-7.0.47.zip</tomcat7.download.url>
+        <test.log.folder>${project.build.directory}/logs/test</test.log.folder>
+        <local.debug.wait>n</local.debug.wait>
+        <local.servlet.port>9090</local.servlet.port>
+        <local.debug.port>7000</local.debug.port>
+        <serverJvmArgs>
+            -Duser.country=EN
+            -Duser.language=en
+            -Duser.timezone=UTC
+            -Djava.awt.headless=true
+            -XX:MaxPermSize=256M
+            -Xdebug
+            -Xrunjdwp:transport=dt_socket,server=y,suspend=${local.debug.wait},address=${local.debug.port}
+        </serverJvmArgs>
+    </properties>
+
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>admin</finalName>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+
         <plugins>
             <plugin>
                 <!-- Used for extracting admin-web-client.war to output dir -->
@@ -47,12 +66,39 @@
                                     <excludes>META-INF/**,WEB-INF/**</excludes>
                                 </artifactItem>
                             </artifactItems>
-                            <outputDirectory>${project.build.directory}/common-admin</outputDirectory>
+                            <outputDirectory>${project.build.directory}/admin</outputDirectory>
                             <overWriteReleases>false</overWriteReleases>
                             <overWriteSnapshots>true</overWriteSnapshots>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <version>1.4.12</version>
+                <configuration>
+                    <configuration>
+                        <properties>
+                            <cargo.servlet.port>${local.servlet.port}</cargo.servlet.port>
+                            <cargo.jvmargs>${serverJvmArgs}</cargo.jvmargs>
+                        </properties>
+                    </configuration>
+                    <container>
+                        <!-- timeout increased from teh default 240s to 300s-->
+                        <timeout>300000</timeout>
+                        <containerId>tomcat7x</containerId>
+                        <zipUrlInstaller>
+                            <url>${tomcat7.download.url}</url>
+                        </zipUrlInstaller>
+                        <systemProperties>
+                            <log.folder>${project.build.directory}/logs</log.folder>
+                        </systemProperties>
+                        <log>${project.build.directory}/logs/container.log</log>
+                        <logLevel>info</logLevel>
+                    </container>
+                </configuration>
             </plugin>
 
             <plugin>
