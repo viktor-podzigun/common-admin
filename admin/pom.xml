@@ -117,6 +117,45 @@
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>demo</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-antrun-plugin</artifactId>
+                        <inherited>false</inherited>
+                        <executions>
+                            <execution>
+                                <id>copy-demo-database-context</id>
+                                <phase>process-resources</phase>
+                                <goals>
+                                    <goal>run</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <tasks>
+                                <delete file="${project.build.outputDirectory}/spring/dao-context.xml"/>
+                                <copy file="${project.basedir}/src/test/resources/demo/dao-context-demo.xml"
+                                      tofile="${project.build.outputDirectory}/spring/dao-context.xml"/>
+                                <copy file="${project.basedir}/src/test/resources/demo/demo-data.sql"
+                                      tofile="${project.build.outputDirectory}/demo-data.sql"/>
+                            </tasks>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.hsqldb</groupId>
+                    <artifactId>hsqldb</artifactId>
+                    <version>2.2.9</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>com.googlecode.web-commons</groupId>
