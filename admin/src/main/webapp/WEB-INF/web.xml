@@ -37,7 +37,7 @@
     
     <!-- ************************ Filters section ************************ -->
     
-    <filter>
+    <!--filter>
         <filter-name>RemoteIpFilter</filter-name>
         <filter-class>org.apache.catalina.filters.RemoteIpFilter</filter-class>
         <init-param>
@@ -57,7 +57,7 @@
         <filter-name>RemoteIpFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
+    </filter-mapping-->
 
     <filter>
         <display-name>CommonFilter</display-name>
@@ -103,5 +103,9 @@
 
 
     <display-name>Common Admin Demo</display-name>
+
+    <welcome-file-list>
+        <welcome-file>admin.html</welcome-file>
+    </welcome-file-list>
 
 </web-app>
