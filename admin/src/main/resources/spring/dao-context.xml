@@ -12,8 +12,6 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     
-    <context:property-placeholder location="classpath:jdbc.properties" />
-    
     <!--
 	Responsible for creating EntityManagers opening transactions and binding them to the current thread context.
 	-->    
