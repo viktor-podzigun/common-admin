@@ -4,7 +4,6 @@ package com.googlecode.common.admin.service;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import com.googlecode.common.i18n.MessageControl;
 import com.googlecode.common.service.ResponseMessage;
 import com.googlecode.i18n.annotations.MessageProvider;
 
@@ -176,8 +175,7 @@ public enum AdminResponses implements ResponseMessage {
     public String getMessage(Locale locale) {
         String key = toString();
         ResourceBundle bundle = ResourceBundle.getBundle(
-                AdminResponses.class.getName(), locale, 
-                MessageControl.INSTANCE);
+                AdminResponses.class.getName(), locale);
         
         try {
             return bundle.getString(key);
@@ -186,5 +184,4 @@ public enum AdminResponses implements ResponseMessage {
             return "!" + key + "!"; //$NON-NLS-1$ //$NON-NLS-2$
         }
     }
-    
 }
