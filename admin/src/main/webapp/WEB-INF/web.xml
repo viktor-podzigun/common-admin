@@ -65,7 +65,7 @@
         <filter-class>com.googlecode.common.web.CommonFilter</filter-class>
         <init-param>
             <param-name>appDomain</param-name>
-            <param-value>.appspot.com</param-value>
+            <param-value>.common-admin.appspot.com</param-value>
         </init-param>
     </filter>
     <filter-mapping>

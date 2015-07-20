@@ -1,8 +1,6 @@
 
 package com.googlecode.common.admin.web.controller;
 
-import com.googlecode.common.admin.service.PermissionManagementService;
-import com.googlecode.common.admin.service.UserManagementService;
 import java.net.URI;
 import java.util.BitSet;
 import java.util.EnumSet;
@@ -15,6 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import com.googlecode.common.admin.domain.SystemEntity;
+import com.googlecode.common.admin.domain.SystemUser;
+import com.googlecode.common.admin.domain.User;
+import com.googlecode.common.admin.domain.UserToken;
+import com.googlecode.common.admin.protocol.signin.SigninRequests;
+import com.googlecode.common.admin.protocol.user.UserDTO;
+import com.googlecode.common.admin.service.PermissionManagementService;
+import com.googlecode.common.admin.service.SystemService;
+import com.googlecode.common.admin.service.UserManagementService;
 import com.googlecode.common.protocol.BaseResponse;
 import com.googlecode.common.protocol.admin.AdminRequests;
 import com.googlecode.common.protocol.login.LoginRedirectResponse;
@@ -27,13 +34,6 @@ import com.googlecode.common.util.Bits;
 import com.googlecode.common.util.CollectionsUtil;
 import com.googlecode.common.util.UriHelpers;
 import com.googlecode.common.web.ServletHelpers;
-import com.googlecode.common.admin.domain.SystemEntity;
-import com.googlecode.common.admin.domain.SystemUser;
-import com.googlecode.common.admin.domain.User;
-import com.googlecode.common.admin.domain.UserToken;
-import com.googlecode.common.admin.protocol.signin.SigninRequests;
-import com.googlecode.common.admin.protocol.user.UserDTO;
-import com.googlecode.common.admin.service.SystemService;
 
 
 /**
@@ -49,7 +49,7 @@ public class LoginController extends BaseController {
     private AdminService                adminService;
 
     @Autowired
-    private UserManagementService usersService;
+    private UserManagementService       usersService;
     
     @Autowired
     private PermissionManagementService permissionsService;
@@ -159,9 +159,7 @@ public class LoginController extends BaseController {
     private LoginRespDTO prepareLoginResponse(int systemId, SystemUser su, 
             int userId, boolean rememberMe) {
         
-        String token = authorizationService.createUserToken(
-                su.getPk().getUser(), rememberMe);
-        
+        String token = authorizationService.createUserToken(su.getPk().getUser(), rememberMe);
         return prepareLoginResponse(systemId, su, userId, token);
     }
     
@@ -189,11 +187,11 @@ public class LoginController extends BaseController {
         resp.setAppMenu(systemsService.getAppMenu(systemId, userId));
         
         // prepare user settings URL
-        URI url = URI.create(ServletHelpers.getRequestUrl(
-                ServletHelpers.getRequest()));
-        resp.setSettingsUrl(UriHelpers.setPath(url, "/admin/profile.html"));
-        
+        final URI url = URI.create(ServletHelpers.getRequestUrl(ServletHelpers.getRequest()));
+
+        final String root = adminService.getAdminAppRoot();
+        resp.setSettingsUrl(UriHelpers.setPath(url, (!root.equals("/") ? root : "")
+                + "/profile.html"));
         return resp;
     }
-
 }

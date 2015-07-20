@@ -15,9 +15,16 @@
 		Scans within the base package of the application for annotated classes to configure as beans. 
 	-->
 	<context:component-scan base-package="com.googlecode.common" />
-	
-    <bean id="configurationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="location" value="classpath:app.properties"/>
+
+    <bean id="configurationProperties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_FALLBACK"/>
+        <property name="searchSystemEnvironment" value="true"/>
+        <property name="locations">
+            <list>
+                <value>classpath:app.properties</value>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
     </bean>
 
 </beans>
