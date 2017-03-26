@@ -95,7 +95,7 @@
                         <systemProperties>
                             <log.folder>${project.build.directory}/logs</log.folder>
                         </systemProperties>
-                        <log>${project.build.directory}/logs/container.log</log>
+                        <!--log>${project.build.directory}/logs/container.log</log-->
                         <logLevel>info</logLevel>
                     </container>
                 </configuration>
@@ -240,6 +240,11 @@
             <artifactId>postgresql</artifactId>
             <version>9.1-901.jdbc4</version>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.5.3</version>
         </dependency>
 
         <!-- logs-->

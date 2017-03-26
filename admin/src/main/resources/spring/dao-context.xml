@@ -24,8 +24,8 @@
     -->
 	<tx:annotation-driven mode="proxy" transaction-manager="transactionManager"/>
 	
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+	<bean depends-on="liquibase" id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="appDataSource" />
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="database" value="POSTGRESQL"/> <!-- HSQL --> 
@@ -35,7 +35,7 @@
 		</property>
 	</bean>
 	
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="appDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName"><value>${admin_jdbc.driverClassName}</value></property>
         <property name="url"><value>${admin_jdbc.url}</value></property>
         <property name="username"><value>${admin_jdbc.username}</value></property>
@@ -45,5 +45,16 @@
         <property name="poolPreparedStatements" value="true" />
         <property name="maxOpenPreparedStatements" value="1024"/>   
     </bean>
-    
+
+	<bean id="schemaDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass"><value>${admin_jdbc.driverClassName}</value></property>
+		<property name="url"><value>${admin_jdbc.url}</value></property>
+		<property name="username"><value>${admin_liquibase.username}</value></property>
+		<property name="password"><value>${admin_liquibase.password}</value></property>
+	</bean>
+
+	<bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+		<property name="dataSource" ref="schemaDataSource" />
+		<property name="changeLog" value="classpath:/common/admin/changelog/adminChangeLog.xml" />
+	</bean>
 </beans>

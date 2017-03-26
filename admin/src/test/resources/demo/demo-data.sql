@@ -20,8 +20,8 @@ INSERT INTO users(id, active, created, last_login_date, ldap_domain, login, modi
 --
 -- Insert test admin system (application)
 --
-INSERT INTO systems(id, name, password, title, url, parent_id)
-    VALUES (1, 'admin', 'admin', 'Common Admin Demo', 'http://common-admin.appspot.com/admin.html', NULL);
+--INSERT INTO systems(id, name, password, title, url, parent_id)
+--    VALUES (1, 'admin', 'admin', 'Common Admin Demo', 'http://localhost:9090/admin.html', NULL);
 
 --
 -- Insert admin app test user with all permissions (SUPERUSER role)
@@ -29,8 +29,3 @@ INSERT INTO systems(id, name, password, title, url, parent_id)
 INSERT INTO systems_users(inherited_roles, modified_date, roles, user_id, system_id, modifiedby_id, parent_id)
     VALUES (NULL, NULL, 1, 1, 1, NULL, NULL);
 
---
--- Insert admin app server
---
-INSERT INTO systems_servers(id, name, url, system_id)
-    VALUES (1, 'default', 'http://common-admin.appspot.com/', 1);
