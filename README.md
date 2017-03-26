@@ -39,7 +39,9 @@ mvn clean install
 cd admin
 mvn cargo:run
 ```
+Then open the following url in the Browser: `http://localhost:9090/admin/admin.html`
 
+To login use `test/test` as login/password.
 
 Screenshots
 ==============
