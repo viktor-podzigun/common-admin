@@ -73,7 +73,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
@@ -86,8 +85,7 @@
                         </properties>
                     </configuration>
                     <container>
-                        <!-- timeout increased from teh default 240s to 300s-->
-                        <timeout>300000</timeout>
+                        <timeout>60000</timeout>
                         <containerId>tomcat7x</containerId>
                         <zipUrlInstaller>
                             <url>${tomcat7.download.url}</url>
@@ -138,7 +136,7 @@
         </plugins>
     </build>
 
-    <profiles>
+    <!--profiles>
         <profile>
             <id>demo</id>
             <build>
@@ -175,7 +173,7 @@
                 </dependency>
             </dependencies>
         </profile>
-    </profiles>
+    </profiles-->
 
     <dependencies>
         <dependency>
@@ -224,6 +222,22 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${org.springframework.version}</version>
+        </dependency>
+        <!-- Spring-MVC REST API docs -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-spring-web</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.1.0</version>
         </dependency>
 
         <!-- Servlet -->

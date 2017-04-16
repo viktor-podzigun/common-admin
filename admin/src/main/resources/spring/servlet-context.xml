@@ -21,4 +21,15 @@
 	<!-- Scans within the base package of the application for @Components to configure as beans -->
 	<context:component-scan base-package="com.googlecode.common.admin.web" />
 
+	<!-- Enables swgger ui-->
+	<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+
+	<!-- Include a swagger configuration-->
+	<bean name="swaggerJsonSerializer" class="springfox.documentation.swagger2.configuration.Swagger2JacksonModule"/>
+	<bean class="springfox.documentation.spring.web.json.JsonSerializer">
+		<constructor-arg ref="swaggerJsonSerializer"/>
+	</bean>
+	<bean name="/applicationSwaggerConfig" class="com.googlecode.common.admin.web.ApplicationSwaggerConfig"/>
+
 </beans>

@@ -1,18 +1,6 @@
 
 package com.googlecode.common.admin.web.controller;
 
-import java.net.URI;
-import java.util.BitSet;
-import java.util.EnumSet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import com.googlecode.common.admin.domain.SystemEntity;
 import com.googlecode.common.admin.domain.SystemUser;
 import com.googlecode.common.admin.domain.User;
@@ -34,6 +22,16 @@ import com.googlecode.common.util.Bits;
 import com.googlecode.common.util.CollectionsUtil;
 import com.googlecode.common.util.UriHelpers;
 import com.googlecode.common.web.ServletHelpers;
+import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.net.URI;
+import java.util.BitSet;
+import java.util.EnumSet;
 
 
 /**
@@ -44,39 +42,47 @@ public class LoginController extends BaseController {
 
     @Autowired
     private SystemService               systemsService;
-    
+
     @Autowired
     private AdminService                adminService;
 
     @Autowired
     private UserManagementService       usersService;
-    
+
     @Autowired
     private PermissionManagementService permissionsService;
-    
+
 
     @RequestMapping(value   = SigninRequests.SIGNIN,
                     method  = RequestMethod.GET)
     public @ResponseBody LoginRedirectResponse signin(
-            HttpServletRequest req, HttpServletResponse resp, 
-            @RequestParam(value=SigninRequests.QPARAM_REMEMBER_ME, 
-                defaultValue="false") boolean rm, 
-            @RequestParam(value=SigninRequests.QPARAM_TARGET_URL, 
+            HttpServletRequest req, HttpServletResponse resp,
+            @RequestParam(value=SigninRequests.QPARAM_REMEMBER_ME,
+                defaultValue="false") boolean rm,
+            @RequestParam(value=SigninRequests.QPARAM_TARGET_URL,
                 defaultValue="") String targetUrl) {
-        
+
         User user = authorizationService.checkUser(
                 authorizationService.getUserForLogin(req));
         String token = authorizationService.createUserToken(user, rm);
-        
+
         ServletHelpers.addTokenCookie(resp, token);
         return new LoginRedirectResponse(targetUrl);
     }
-    
+
+    @ApiOperation(value = "Login the given user and return login info",
+        notes = "User name and password are taken from the 'AUTHORIZATION' request header.")
+    @ApiImplicitParams({@ApiImplicitParam(value = "Login data",
+            name = "AUTHORIZATION",
+            paramType = "header",
+            required = true,
+            defaultValue = "Basic base64(user:pass)"
+    )})
     @RequestMapping(value   = LoginRequests.LOGIN,
                     method  = RequestMethod.GET)
-    public @ResponseBody LoginResponse login(
-            HttpServletRequest req, HttpServletResponse resp, 
-            @RequestParam(value="rm", defaultValue="false") boolean rm) {
+    public @ResponseBody LoginResponse login(HttpServletRequest req, HttpServletResponse resp,
+            @ApiParam(value = "Remember me flag", defaultValue = "false")
+            @RequestParam(value = "rm", defaultValue = "false") boolean rm) {
         
         SystemEntity system = systemsService.getAdminSystem();
         User user = authorizationService.checkUser(

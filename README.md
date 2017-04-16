@@ -43,6 +43,11 @@ Then open the following url in the Browser: `http://localhost:9090/admin/admin.h
 
 To login use `test/test` as login/password.
 
+## REST API Documentation
+```
+http://localhost:9090/admin/swagger-ui.html
+```
+
 Screenshots
 ==============
 

@@ -39,7 +39,7 @@ public class Admin extends AbstractClientApp {
         updateUserInfo(loginDto);
         
         AppMainPanel mainPanel = AdminInjector.INSTANCE.appPanel();
-        mainPanel.setCopyright("Common Admin Demo");
+        mainPanel.setCopyright(loginDto.getAppMenu().getTitle());
         
         BrowseTreeNode root = mainPanel.getBrowsePanel()
                 .getTreePanel().getRoot();

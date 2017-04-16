@@ -39,7 +39,7 @@ public class LdapServiceImpl extends AbstractManageableService implements
     public void init() {
         super.init();
         
-        URI uri = URI.create("ldap://test:test@vins0010.nt.lan:389/OU=UA,OU=Employees,DC=nt,DC=lan");
+        URI uri = URI.create("ldap://test:test@localhost:1234");
         String login = null;
         String password = null;
         

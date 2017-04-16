@@ -38,7 +38,7 @@ public class ProfileClient extends AbstractClientApp {
     @Override
     protected AppMainPanel createUI(LoginRespDTO loginDto) {
         AppMainPanel mainPanel = new AppMainPanel();
-        mainPanel.setCopyright("Common Admin Demo");
+        mainPanel.setCopyright(loginDto.getAppMenu().getTitle());
         
         mainPanel.showPanel(panel);
         return mainPanel;
