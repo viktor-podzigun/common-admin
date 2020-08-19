@@ -1,6 +1,8 @@
 # common-admin
 Provides reusable components for simplifying user permissions and applications management.
 
+DEPRECATED! Development of this app continues in the other [repo](https://github.com/scommons/scommons-admin)
+
 ## Setup Postgres DB
 
 ### Create and start the `postgres` docker container
